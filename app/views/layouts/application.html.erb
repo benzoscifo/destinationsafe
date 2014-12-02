@@ -5,33 +5,16 @@
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
-  <script src="http://maps.googleapis.com/maps/api/js"></script>
-  <script>
-var myCenter=new google.maps.LatLng(51.508742,-0.120850);
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
 
-function initialize()
-{
-var mapProp = {
-  center:myCenter,
-  zoom:5,
-  mapTypeId:google.maps.MapTypeId.ROADMAP
-  };
+<script src="http://maps.googleapis.com/maps/api/js"></script>
 
-var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
-
-var marker=new google.maps.Marker({
-  position:myCenter,
-  });
-
-marker.setMap(map);
-}
-
-google.maps.event.addDomListener(window, 'load', initialize);
-</script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+ 
 </head>
 <body>
   <div id="container">
+
       <div class="user-nav">
         <% if user_signed_in? %>
           Logged in as
@@ -47,21 +30,23 @@ google.maps.event.addDomListener(window, 'load', initialize);
           <%= link_to 'Login', new_user_session_path %>
         <% end %>
       </div>
-      <% flash.each do |name, msg| %>
-        <%= content_tag :div, msg, :id => "flash_#{name}" %>
-      <% end %>
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
-      <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-      <div class="container">
-        <div id="googleMap" style="width:500px;height:380px;"></div>
-      <%= yield %>
-    </div>
-  </div>
-</nav>
-  <button type="button" class="btn btn-primary">Primary</button>
-  
 
+      <div>
+        <% flash.each do |name, msg| %>
+          <%= content_tag :div, msg, :id => "flash_#{name}" %>
+        <% end %>
+        <p class="notice"><%= notice %></p>
+        <p class="alert"><%= alert %></p>
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+          <button type="button" class="btn btn-primary">Primary</button>
+        </nav>
+      </div>
+      
+      <div>
+        <%= yield %>
+      </div>
+
+  </div>
 </body>
 </html>
    
