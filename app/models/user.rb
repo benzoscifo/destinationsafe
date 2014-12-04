@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :omniauth_providers => [:google_oauth2, :twitter, :facebook]
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :image
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :image, :provider, :uid, :name
   # attr_accessible :title, :body
 
   mount_uploader :image, ProfileImageUploader

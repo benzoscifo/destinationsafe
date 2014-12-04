@@ -3,12 +3,13 @@
 <head>
   <title>DestinationSafe</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
+  <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBSA52qklrV9HJDgWfxIhh4xsZ9SEql924&sensor=false&libraries=places"></script>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
   
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
 
-<script src="http://maps.googleapis.com/maps/api/js"></script>
+
 
  
 </head>
@@ -40,6 +41,10 @@
         <p class="alert"><%= alert %></p>
 
       </div>
+
+      <%= link_to 'users' do %><%= image_tag("facebook.png", class:"small-avatar") %><% end %>
+      <%= link_to 'users' do %><%= image_tag("twitter.png", class:"small-avatar") %><% end %>
+      <%= link_to 'users' do %><%= image_tag("google-plus-icon.png", class:"small-avatar") %><% end %>
       
       <div>
         <%= yield %>

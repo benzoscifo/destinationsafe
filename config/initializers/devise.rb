@@ -10,10 +10,10 @@ Devise.setup do |config|
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
-  config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
+  config.mailer_sender = 'benjamin.cranwell@yahoo.co.uk'
 
   # Configure the class responsible to send e-mails.
-  # config.mailer = 'Devise::Mailer'
+  config.mailer = 'Devise::Mailer'
 
   # ==> ORM configuration
   # Load and configure the ORM. Supports :active_record (default) and
@@ -53,14 +53,13 @@ Devise.setup do |config|
   # given strategies, for example, `config.params_authenticatable = [:database]` will
   # enable it only for database (email + password) authentication.
   # config.params_authenticatable = true
-   config.omniauth :google_oauth2, ENV["GOOGLE_AUTH_CLIENT_ID"], ENV["GOOGLE_AUTH_CLIENT_SECRET"], scope: "email, profile", client_options: { image_aspect_ratio: "square",
-    image_aspect_ratio: "square",
+   config.omniauth :google_oauth2, ENV["GOOGLE_ID_DESTINATION"], ENV["GOOGLE_SECRET_DESTINATION"], scope: "email, profile", client_options: { image_aspect_ratio: "square",
     image_size: 30
   }
 
-  config.omniauth :twitter, ENV["TWITTER_ID"], ENV["TWITTER_SECRET"]
+  config.omniauth :twitter, ENV["TWITTER_ID_DESTINATION"], ENV["TWITTER_SECRET_DESTINATION"]
   
-  config.omniauth :facebook, ENV["FACEBOOK_ID_L"], ENV["FACEBOOK_SECRET_L"],
+  config.omniauth :facebook, ENV["FACEBOOK_ID_DESTINATION"], ENV["FACEBOOK_SECRET_DESTINATION"],
   :scope => 'email,user_birthday,read_stream', :display => 'popup'
 
   # Tell if authentication through HTTP Auth is enabled. False by default.

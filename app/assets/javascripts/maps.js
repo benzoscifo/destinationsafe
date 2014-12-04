@@ -1,52 +1,87 @@
 
-
 function initialize() {
-  var myCenter=new google.maps.LatLng(51.508742,-0.120850);
-  var mapProp = {
-      center:myCenter,
-      zoom: 7,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-  };
-  var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
 
-  var contentString = '<div id="content">'+
-      '<div id="siteNotice">'+
-      '</div>'+
-      '<h1 id="firstHeading" class="firstHeading">Uluru</h1>'+
-      '<div id="bodyContent">'+
-      '<p><b>Uluru</b>, also referred to as <b>Ayers Rock</b>, is a large ' +
-      '<p>Attribution: Uluru, <a href="http://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">'+
-      'http://en.wikipedia.org/w/index.php?title=Uluru</a> '+
-      '(last visited June 22, 2009).</p>'+
-      '</div>'+
-      '</div>';
+  var markers = [];
+  var map = new google.maps.Map(document.getElementById('map-canvas'), {
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  });
 
-  var infowindow= new google.maps.InfoWindow({
+  var contentString = '<p> yo </p>'
+
+  var defaultBounds = new google.maps.LatLngBounds(
+      new google.maps.LatLng(-33.8902, 151.1759),
+      new google.maps.LatLng(-33.8474, 151.2631));
+  map.fitBounds(defaultBounds);
+
+  // Create the search box and link it to the UI element.
+  var input = (document.getElementById('pac-input'));
+  map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+  var searchBox = new google.maps.places.SearchBox(input);
+
+  var infowindow = new google.maps.InfoWindow({
     content: contentString
   });
 
-  var marker=new google.maps.Marker({
-    position:myCenter,
+  // Listen for the event fired when the user selects an item from the
+  // pick list. Retrieve the matching places for that item.
+  google.maps.event.addListener(searchBox, 'places_changed', function() {
+    var places = searchBox.getPlaces();
+
+    if (places.length == 0) {
+      return;
+    }
+    for (var i = 0, marker; marker = markers[i]; i++) {
+      marker.setMap(null);
+    }
+
+    // For each place, get the icon, place name, and location.
+    markers = [];
+    var bounds = new google.maps.LatLngBounds();
+    for (var i = 0, place; place = places[i]; i++) {
+      var image = {
+        url: place.icon,
+        size: new google.maps.Size(71, 71),
+        origin: new google.maps.Point(0, 0),
+        anchor: new google.maps.Point(17, 34),
+        scaledSize: new google.maps.Size(25, 25)
+      };
+
+      // Create a marker for each place.
+      var marker = new google.maps.Marker({
+        map: map,
+        icon: image,
+        title: place.name,
+        position: place.geometry.location
+      });
+
+      markers.push(marker);
+
+      bounds.extend(place.geometry.location);
+    }
+
+    map.fitBounds(bounds);
   });
 
-  var circle=new google.maps.Circle({
-    map: map,
-    radius: 1000,
-    fillColor: '#AA0000'
+  // Bias the SearchBox results towards places that are within the bounds of the
+  // current map's viewport.
+  google.maps.event.addListener(map, 'bounds_changed', function() {
+    var bounds = map.getBounds();
+    searchBox.setBounds(bounds);
   });
-
-  circle.bindTo('center', marker, 'position');
-
-
-
-  google.maps.event.addListener(marker, 'click', function() {
-    infowindow.open(map,marker);
-  });
-
-  marker.setMap(map);
+}
+window.onload = function(){
+  initialize()
 }
 
-$(function() {
-  google.maps.event.addDomListener(window, 'load', initialize)
-
-})
+// $(function() {
+//   $.ajax({
+//     url: "/posts",
+//     dataType: "JSON",
+//     method: "get"
+//   }).success(function(data){
+//     posts= data;
+//     initialize();
+//     google.maps.event.addDomListener(window, 'load', initialize)
+//   })
+// })
