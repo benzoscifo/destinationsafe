@@ -2,7 +2,7 @@ body{
   width: 100%;
 }
 #map-canvas {
-  width:100%; 
+  width:40%; 
   min-height:500px; 
   position: relative;
 }
