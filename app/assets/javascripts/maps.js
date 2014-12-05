@@ -91,9 +91,13 @@ function initialize() {
       var bounds = new google.maps.LatLngBounds();
       for (var i = 0, place; place = data[i]; i++) {
 
+        var infowindow = new google.maps.InfoWindow({
+          content: "helloworld"
+        });
         // Create a marker for each place.
         var marker = new google.maps.Marker({
           map: map,
+          infowindow: infowindow,
           title: place.title,
           position: new google.maps.LatLng(place.latitude, place.longitude)
         });
@@ -102,6 +106,10 @@ function initialize() {
 
         bounds.extend(new google.maps.LatLng(place.latitude, place.longitude));
       }
+
+      google.maps.event.addListener(marker, 'click', function() {
+        infowindow.open(map,marker);
+      });
 
       map.fitBounds(bounds);
 
@@ -116,7 +124,7 @@ function initialize() {
   });
 }
 window.onload = function(){
-  initialize()
+  initialize();
 }
 
 // $(function() {
