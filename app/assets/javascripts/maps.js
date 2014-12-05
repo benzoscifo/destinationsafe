@@ -8,6 +8,38 @@ function initialize() {
 
   var contentString = '<p> yo </p>'
 
+// if(navigator.geolocation) {
+//     navigator.geolocation.getCurrentPosition(function(position) {
+//       var pos = new google.maps.LatLng(position.coords.latitude,
+//                                        position.coords.longitude);
+
+//       var infowindow = new google.maps.InfoWindow({
+//         map: map,
+//         position: pos,
+//         content: 'Location found using HTML5.'
+//       });
+
+//       map.setCenter(pos);
+//     }, function() {
+//       handleNoGeolocation(true);
+//     });
+//   } else {
+//     // Browser doesn't support Geolocation
+//     handleNoGeolocation(false);
+//   }
+// }
+
+// function handleNoGeolocation(errorFlag) {
+//   if (errorFlag) {
+//     var content = 'Error: The Geolocation service failed.';
+//   } else {
+//     var content = 'Error: Your browser doesn\'t support geolocation.';
+//   }
+
+// navigator.geolocation.getCurrentPosition(function(position) {
+//        lat = new google.maps.LatLng(position.coords.latitude)
+//        lon = new google.maps.LatLng(position.coords.longitude)
+//       })
   var defaultBounds = new google.maps.LatLngBounds(
       new google.maps.LatLng(-33.8902, 151.1759),
       new google.maps.LatLng(-33.8474, 151.2631));
@@ -19,48 +51,61 @@ function initialize() {
 
   var searchBox = new google.maps.places.SearchBox(input);
 
-  var infowindow = new google.maps.InfoWindow({
-    content: contentString
-  });
+  // var infowindow = new google.maps.InfoWindow({
+  //   content: contentString
+  // });
+
+  // var marker = new google.maps.InfoWindow({
+  //   position: defaultBounds,
+  //   map: map,
+  // });
+
+  // google.maps.event.addListener(marker, 'click', function(){
+  //   infowindow.open(map, marker);
+  // });
 
   // Listen for the event fired when the user selects an item from the
   // pick list. Retrieve the matching places for that item.
   google.maps.event.addListener(searchBox, 'places_changed', function() {
     var places = searchBox.getPlaces();
+    var address = places[0].name;
+    console.log(address);
+    $.ajax({
+    url: "/findposts",
+    dataType: "JSON",
+    method: "post",
+    data: {address: address}
+    }).success(function(data){
+      //If there is not data return from the function;
+      if (data.length == 0) {
+        return;
+      }
+      //Clearing previous markers from the page;
+      for (var i = 0, marker; marker = markers[i]; i++) {
+        marker.setMap(null);
+      }
 
-    if (places.length == 0) {
-      return;
-    }
-    for (var i = 0, marker; marker = markers[i]; i++) {
-      marker.setMap(null);
-    }
+      //For each place, get the icon, place name, and location.
+      markers = [];
 
-    // For each place, get the icon, place name, and location.
-    markers = [];
-    var bounds = new google.maps.LatLngBounds();
-    for (var i = 0, place; place = places[i]; i++) {
-      var image = {
-        url: place.icon,
-        size: new google.maps.Size(71, 71),
-        origin: new google.maps.Point(0, 0),
-        anchor: new google.maps.Point(17, 34),
-        scaledSize: new google.maps.Size(25, 25)
-      };
+      var bounds = new google.maps.LatLngBounds();
+      for (var i = 0, place; place = data[i]; i++) {
 
-      // Create a marker for each place.
-      var marker = new google.maps.Marker({
-        map: map,
-        icon: image,
-        title: place.name,
-        position: place.geometry.location
-      });
+        // Create a marker for each place.
+        var marker = new google.maps.Marker({
+          map: map,
+          title: place.title,
+          position: new google.maps.LatLng(place.latitude, place.longitude)
+        });
 
-      markers.push(marker);
+        markers.push(marker);
 
-      bounds.extend(place.geometry.location);
-    }
+        bounds.extend(new google.maps.LatLng(place.latitude, place.longitude));
+      }
 
-    map.fitBounds(bounds);
+      map.fitBounds(bounds);
+
+    });
   });
 
   // Bias the SearchBox results towards places that are within the bounds of the

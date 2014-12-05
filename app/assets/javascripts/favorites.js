@@ -1,14 +1,14 @@
-railsAjax = {};
-railsAjax.fields = ["is_favorited", "post_id", "user_id"];
+favoriteAjax = {};
+favoriteAjax.fields = ["is_favorited", "post_id", "user_id"];
 
-railsAjax.togglePages = function(showPage){
+favoriteAjax.togglePages = function(showPage){
   var hidePage = (showPage === '#new_favorite') ? '#all_favorites' : '#new_favorite';
   $(hidePage).slideUp(function(){
     $(showPage).slideDown();
   });
 }
 
-railsAjax.favoriteForm = function(event){
+favoriteAjax.favoriteForm = function(event){
   event.preventDefault();
   var id = $("form #id").val();
   if(id != ""){
@@ -16,11 +16,11 @@ railsAjax.favoriteForm = function(event){
     type = "PUT"
   } else {
     url = '/favorites';
-    type = "FAVORITE";
+    type = "POST";
   }
 
   var data = {};
-  $.each(railsAjax.fields, function(index, field){
+  $.each(favoriteAjax.fields, function(index, field){
     data[field] = $('#' + field).val();
   })
 
@@ -31,12 +31,12 @@ railsAjax.favoriteForm = function(event){
     dataType: "json"
   }).success(function(data){
     //Fetch all favorites from the server (will include the favorite we just created);
-    railsAjax.getFavorites();
-    railsAjax.togglePages('#all_favorites');
+    favoriteAjax.getFavorites();
+    favoriteAjax.togglePages('#all_favorites');
   })
 }
 
-railsAjax.getFavorites = function(){
+favoriteAjax.getFavorites = function(){
   //Clear the favorites table to avoid duplicating favorites;
   $('#all_favorites table tbody').empty();
   
@@ -60,7 +60,7 @@ railsAjax.getFavorites = function(){
   })
 }
 
-railsAjax.deleteFavorite = function(){
+favoriteAjax.deleteFavorite = function(){
   $this = $(this);
   var favoriteId = $this.data('id');
   $.ajax({
@@ -73,7 +73,7 @@ railsAjax.deleteFavorite = function(){
   });
 }
 
-railsAjax.editFavorite = function(){
+favoriteAjax.editFavorite = function(){
   console.log('editfavorite');
   //Look up the favorite in the database so we can prepopulate the form with data;
   var favoriteId = $(this).data('id');
@@ -82,10 +82,10 @@ railsAjax.editFavorite = function(){
     type: 'GET',
     dataType: "json"
   }).success(function(data){
-    $.each(railsAjax.fields.concat(['id']), function(index, field){
+    $.each(favoriteAjax.fields.concat(['id']), function(index, field){
       $("input[name=" + field + "]").val(data[field]);
     });
-    railsAjax.togglePages('#new_favorite');
+    favoriteAjax.togglePages('#new_favorite');
   })
 }
 
@@ -95,18 +95,18 @@ $(document).ready(function(){
     event.preventDefault();
     var showPage = '#' + $(this).attr('id').replace('_link', '');
     if(showPage === '#new_favorite'){
-      $.each(railsAjax.fields.concat(['id']), function(index, field){
+      $.each(favoriteAjax.fields.concat(['id']), function(index, field){
         $("input[name=" + field + "]").val('');
       });
     };
-    railsAjax.togglePages(showPage);
+    favoriteAjax.togglePages(showPage);
   });
 
-  $('#favorite_form').on('submit', railsAjax.favoriteForm);
-  railsAjax.getFavorites();
+  $('#favorite_form').on('submit', favoriteAjax.favoriteForm);
+  favoriteAjax.getFavorites();
   //Need to use event delegation here, as .delete_favorites is not in html when page loads;
-  $('#all_favorites').on('click', '.delete_favorite', railsAjax.deleteFavorite);
-  $('#all_favorites').on('click', '.edit_favorite', railsAjax.editFavorite);
+  $('#all_favorites').on('click', '.delete_favorite', favoriteAjax.deleteFavorite);
+  $('#all_favorites').on('click', '.edit_favorite', favoriteAjax.editFavorite);
 })
 
 

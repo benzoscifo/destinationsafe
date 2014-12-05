@@ -81,4 +81,12 @@ class PostsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def findposts
+    @posts = Post.near(params["address"])
+    respond_to do |format|
+      format.html { redirect_to posts_url }
+      format.json { render json: @posts }
+    end
+  end
 end

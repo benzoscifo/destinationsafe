@@ -4,6 +4,8 @@ DestinationSafe::Application.routes.draw do
 
   resources :posts
 
+  post '/findposts', to: 'posts#findposts'
+
   resources :comments
 
   resources :favorites
