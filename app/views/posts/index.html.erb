@@ -1,5 +1,5 @@
 
-<h1>Listing posts</h1>
+<!-- <h1>Listing posts</h1>
 
 <table>
   <tr>
@@ -29,12 +29,17 @@
 
 <br />
 
-<%= link_to 'New Post', new_post_path %>
-<input id="pac-input" class="controls" type="text" placeholder="Search Box">
-<div id="map-canvas">
-    <div id="googleMap" style="width:500px;height:380px;"></div>
-</div>
+<%= link_to 'New Post', new_post_path %> -->
 
+
+<div class="container">
+    <div class="jumbotron">
+        <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+        <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBSA52qklrV9HJDgWfxIhh4xsZ9SEql924&sensor=false&libraries=places"></script>
+        <div ="googleMap" style="width:500px;height:180px;"></div>
+        <a href="#" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-search"></span> My current location</a> 
+    </div>
+</div
 
 
 
