@@ -1,3 +1,4 @@
+<script type="text/javascript">
 
 function initialize() {
 
@@ -102,6 +103,7 @@ window.onload = function(){
   initialize();
 
 }
+</script>
 
 // $(function() {
 //   $.ajax({

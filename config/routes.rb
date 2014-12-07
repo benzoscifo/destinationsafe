@@ -1,4 +1,5 @@
 DestinationSafe::Application.routes.draw do
+  get 'posts' => 'post#index'
 
   devise_for :users, controllers: {omniauth_callbacks: "omniauth_callbacks"}
 
