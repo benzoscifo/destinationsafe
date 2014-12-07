@@ -26,12 +26,39 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
            <ul class='nav navbar-nav'>
-            <li><%= link_to "Home", posts_path %></li>
-            <li><%= link_to "Sign In", comments_path %></li>
+            <div class="user-nav">
+        <% if user_signed_in? %>
+          Logged in as
+          <b>
+            <%= current_user.email %>
+            <%= image_tag(current_user.image) %>
+          </b>
+          <%= link_to 'Edit Profile', edit_user_registration_path %>
+          \|
+          <%= link_to 'Logout',  destroy_user_session_path, method: :delete %>
+        <% else %>
+          <%= link_to 'Sign up', new_user_registration_path %>
+          \|
+          <%= link_to 'Login', new_user_session_path %>
+        <% end %>
+      </div>
+
+            <!-- <li><%= link_to "Home", posts_path %></li>
+            <li><%= link_to "Sign In", comments_path %></li> -->
           </ul>
         </div><!--/.navbar-collapse -->
       </div>
     </nav>
+    
+
+      <div>
+        <% flash.each do |name, msg| %>
+          <%= content_tag :div, msg, :id => "flash_#{name}" %>
+        <% end %>
+        <p class="notice"><%= notice %></p>
+        <p class="alert"><%= alert %></p>
+
+      </div>
 
     <!-- Main jumbotron for a primary marketing message or call to action -->
     
@@ -48,9 +75,12 @@
 
       <hr>
 
-      
-      <%= render 'partials/footer' %> 
+      <%= render 'partials/carousel' %> 
+      <%= render 'partials/footer' %>
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
   
 </body>
 </html>
