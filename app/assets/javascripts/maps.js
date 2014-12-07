@@ -4,13 +4,13 @@ function initialize() {
 
 
   var markers = [];
-  var map = new google.maps.Map(document.getElementById('map-canvas'), {
+  var map = new google.maps.Map(document.getElementById('googleMap'), {
     mapTypeId: google.maps.MapTypeId.ROADMAP
   });
 
 var defaultBounds = new google.maps.LatLngBounds(
-  new google.maps.LatLng(-33.8902, 151.1759),
-  new google.maps.LatLng(-33.8474, 151.2631));
+  new google.maps.LatLng(51.507351, -0.127758),
+  new google.maps.LatLng(51.507351, -0.127758));
 map.fitBounds(defaultBounds);
 
   // Create the search box and link it to the UI element.
