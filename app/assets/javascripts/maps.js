@@ -19,18 +19,7 @@ map.fitBounds(defaultBounds);
 
   var searchBox = new google.maps.places.SearchBox(input);
 
-  // var infowindow = new google.maps.InfoWindow({
-  //   content: contentString
-  // });
-
-  // var marker = new google.maps.InfoWindow({
-  //   position: defaultBounds,
-  //   map: map,
-  // });
-
-  // google.maps.event.addListener(marker, 'click', function(){
-  //   infowindow.open(map, marker);
-  // });
+  
 
   // Listen for the event fired when the user selects an item from the
   // pick list. Retrieve the matching places for that item.
@@ -94,6 +83,7 @@ map.fitBounds(defaultBounds);
   // Bias the SearchBox results towards places that are within the bounds of the
   // current map's viewport.
   google.maps.event.addListener(map, 'bounds_changed', function() {
+    map.setZoom(9);
     var bounds = map.getBounds();
     searchBox.setBounds(bounds);
   });

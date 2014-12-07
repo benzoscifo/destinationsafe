@@ -1,9 +1,10 @@
 body{
   width: 100%;
 }
-#map-canvas {
+#googleMap {
   width:40%; 
   min-height:500px; 
   position: relative;
 }
 
+@media (max-width: 767px) {googleMap}

@@ -3,4 +3,6 @@ class FavoritesPostIdUserId < ActiveRecord::Base
 
   belongs_to :Post
   belongs_to :User
+
+  before_save :associate_user
 end

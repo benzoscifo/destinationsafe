@@ -15,6 +15,9 @@
   <%= @post.body %>
 </p>
 
+<h2>Comments</h2>
+<%= render @post.comments %>
+
 <p>
   <b>Latitude:</b>
   <%= @post.latitude %>
@@ -24,6 +27,11 @@
   <b>Longitude:</b>
   <%= @post.longitude %>
 </p>
+
+<h2>Add a comment:</h2>
+<%= render @post.comments %>
+
+
 
 
 <%= link_to 'Edit', edit_post_path(@post) %> |
