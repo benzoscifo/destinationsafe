@@ -1,17 +1,20 @@
-
+ var infoWindow = null;
 
 function initialize() {
-
+  var infowindow = new google.maps.InfoWindow({
+    content: "holding"
+  })
 
   var markers = [];
   var map = new google.maps.Map(document.getElementById('googleMap'), {
     mapTypeId: google.maps.MapTypeId.ROADMAP
   });
 
-var defaultBounds = new google.maps.LatLngBounds(
+
+  var defaultBounds = new google.maps.LatLngBounds(
   new google.maps.LatLng(51.507351, -0.127758),
   new google.maps.LatLng(51.507351, -0.127758));
-map.fitBounds(defaultBounds);
+  map.fitBounds(defaultBounds);
 
   // Create the search box and link it to the UI element.
   var input = (document.getElementById('pac-input'));
@@ -32,7 +35,7 @@ map.fitBounds(defaultBounds);
       method: "post",
       data: {address: address}
     }).success(function(data){
-
+      console.log(data)
       //If there is not data return from the function;
       if (data.length == 0) {
         return;
@@ -45,22 +48,22 @@ map.fitBounds(defaultBounds);
       //For each place, get the icon, place name, and location.
       markers = [];
 
-      var infobody = data[0].body;
-      var infotitle = data[0].title;
-      var infouser = 1;
-      var information = infotitle.concat(" " + infobody + " " + infouser);
-
       var bounds = new google.maps.LatLngBounds();
       for (var i = 0, place; place = data[i]; i++) {
+        // debugger;
+        var infobody = place.body;
+        var infotitle = place.title;
+        var infouser = 1;
+        var information = infotitle.concat("<h3>" + infobody + "</h3><a href='/comments/new?post_id=" + place.id + "'>New comment</a>");
 
-        var infowindow = new google.maps.InfoWindow({
-              content: information
-            });
+        var markerInfoWindow = new google.maps.InfoWindow({
+          content: information
+        });
         // get request 
         // Create a marker for each place.
         var marker = new google.maps.Marker({
           map: map,
-          infowindow: infowindow,
+          infowindow: markerInfoWindow,
           title: place.title,
           position: new google.maps.LatLng(place.latitude, place.longitude)
         });
@@ -68,12 +71,17 @@ map.fitBounds(defaultBounds);
         markers.push(marker);
 
         bounds.extend(new google.maps.LatLng(place.latitude, place.longitude));
-    }
+      }
 
-      google.maps.event.addListener(marker, 'click', function() {
-        // ajax call to database get info that corresponds to the marker loc and then inject that contect into info window see line 95 for example
-        infowindow.open(map,marker);
-      });
+
+      for (var i = 0; i < markers.length; i++)  {
+        var marker = markers[i];
+        google.maps.event.addListener(marker, 'click', function () {
+          console.log(this);
+           infowindow.setContent(this.infowindow.content);
+           infowindow.open(map, this);
+        });
+      }
 
       map.fitBounds(bounds);
 
