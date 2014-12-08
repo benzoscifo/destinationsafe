@@ -45,10 +45,10 @@ map.fitBounds(defaultBounds);
       //For each place, get the icon, place name, and location.
       markers = [];
 
-      var infobody = data[0].body
-      var infotitle = data[0].title
-      var infouser = 1
-      var information = infotitle.concat(" " + infobody + " " + infouser)
+      var infobody = data[0].body;
+      var infotitle = data[0].title;
+      var infouser = 1;
+      var information = infotitle.concat(" " + infobody + " " + infouser);
 
       var bounds = new google.maps.LatLngBounds();
       for (var i = 0, place; place = data[i]; i++) {
@@ -92,7 +92,7 @@ map.fitBounds(defaultBounds);
 window.onload = function(){
   initialize();
 
-}
+};
 
 
 // $(function() {

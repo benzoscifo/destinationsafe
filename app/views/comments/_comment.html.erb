@@ -1,8 +1,5 @@
- <p>
-   <strong>User:</strong>
-   <%= comment.user %>
- </p>
- <p>
-   <strong>Comment:</strong>
-   <%= comment.body %>
- </p>
+<%= div_for comment do %>
+<p><strong>Posted<%= time_ago_in_words(comment.created_at) %> ago<strong><br/>
+  <%= comment.body %>
+</p>
+<% end %>

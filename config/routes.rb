@@ -1,5 +1,9 @@
 DestinationSafe::Application.routes.draw do
-  get 'posts' => 'post#index'
+  
+
+  root :to => "posts#index"
+
+  get 'posts' => 'posts#index'
 
   devise_for :users, controllers: {omniauth_callbacks: "omniauth_callbacks"}
 
@@ -10,9 +14,6 @@ DestinationSafe::Application.routes.draw do
   resources :comments
 
   resources :favorites
-
-  root :to => "posts#index"
-
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

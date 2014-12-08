@@ -1,6 +1,6 @@
 class Comment < ActiveRecord::Base
-  attr_accessible :body, :image, :post_id, :user_id
+  attr_accessible :body, :image, :post_id, :user_id, :post
 
-  belongs_to :Post
-  belongs_to :User
+  belongs_to :post
+  belongs_to :user
 end
