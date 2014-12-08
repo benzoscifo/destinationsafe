@@ -87,7 +87,7 @@ class PostsController < ApplicationController
     @posts = Post.near(params["address"])
     respond_to do |format|
       format.html { redirect_to posts_url }
-      format.json { render json: @posts }
+      format.json { render json: @posts, include: :comments}
     end
   end
 end

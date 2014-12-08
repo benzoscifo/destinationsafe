@@ -54,7 +54,14 @@ function initialize() {
         var infobody = place.body;
         var infotitle = place.title;
         var infouser = 1;
-        var information = infotitle.concat("<h3>" + infobody + "</h3><a href='/comments/new?post_id=" + place.id + "'>New comment</a>");
+        var comments = '';
+        if (place.comments.length > 0){
+          $.each(place.comments, function(index, comment){
+            comments += '<p>' + comment.body + '</p>'; 
+          });
+        }
+        
+        var information = infotitle.concat("<h3>" + infobody + "</h3><h3>Comments</h3>"+ comments + "<a href='/comments/new?post_id=" + place.id + "'>New comment</a>");
 
         var markerInfoWindow = new google.maps.InfoWindow({
           content: information
