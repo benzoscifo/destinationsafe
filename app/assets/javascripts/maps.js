@@ -1,21 +1,28 @@
  var infoWindow = null;
 
+
+
 function initialize() {
   var infowindow = new google.maps.InfoWindow({
     content: "holding"
   })
 
+var myCenter=new google.maps.LatLng(51.508742,-0.120850);
+
+var mapProp = {
+  center: myCenter,
+  zoom:11,
+  mapTypeId: google.maps.MapTypeId.ROADMAP
+  };
+
   var markers = [];
-  var map = new google.maps.Map(document.getElementById('googleMap'), {
-    mapTypeId: google.maps.MapTypeId.ROADMAP
-  });
+  var map = new google.maps.Map(document.getElementById('googleMap'),mapProp)
 
 
   var defaultBounds = new google.maps.LatLngBounds(
   new google.maps.LatLng(51.507351, -0.127758),
   new google.maps.LatLng(51.507351, -0.127758));
-  map.fitBounds(defaultBounds);
-
+  // map.fitBounds(defaultBounds);
   // Create the search box and link it to the UI element.
   var input = (document.getElementById('pac-input'));
   map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
@@ -82,7 +89,7 @@ function moveToPosition(place, bounds){
       //If there is not data return from the server;
       if (data.length == 0) {
         moveToPosition(places[0], bounds)
-        
+
       }
       //Clearing previous markers from the page;
       for (var i = 0, marker; marker = markers[i]; i++) {
@@ -108,6 +115,7 @@ function moveToPosition(place, bounds){
       }
 
       map.fitBounds(bounds);
+      map.setZoom(11)
 
     });
 });
@@ -115,7 +123,7 @@ function moveToPosition(place, bounds){
   // Bias the SearchBox results towards places that are within the bounds of the
   // current map's viewport.
   google.maps.event.addListener(map, 'bounds_changed', function() {
-    map.setZoom(9);
+    
     var bounds = map.getBounds();
     searchBox.setBounds(bounds);
   });
