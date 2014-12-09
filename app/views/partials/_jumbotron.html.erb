@@ -1,10 +1,58 @@
 <% if params[:controller] == 'posts' %>
-<div class="jumbotron">
-      <div class="container">
-        <input id="pac-input" class="controls" type="text" placeholder="Search Box">
-        <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBSA52qklrV9HJDgWfxIhh4xsZ9SEql924&sensor=false&libraries=places"></script>
-        <div id="googleMap" style="width:800px;height:300px;"></div>
-        <a href="#" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-search"></span> My current location</a> 
-    </div>
-</div>
-<%end%>
+  <div class="jumbotron">
+    <button onclick="getLocation()">My Current Location</button>
+    <div id="container"></div>
+    <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+    <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBSA52qklrV9HJDgWfxIhh4xsZ9SEql924&sensor=false&libraries=places"></script>
+    <div id="googleMap" style="width:800px;height:300px;"></div>
+  </div>
+  <script>
+    var x = document.getElementById("container");
+    function getLocation() {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(showPosition, showError);
+        } else { 
+            x.innerHTML = "Geolocation is not supported by this browser.";
+        }
+    }
+    
+    function showPosition(position) {
+      lat = position.coords.latitude;
+      lon = position.coords.longitude;
+      latlon = new google.maps.LatLng(lat, lon);
+
+      var myOptions = {
+        center:latlon,
+        zoom:14,
+        mapTypeId:google.maps.MapTypeId.ROADMAP,
+        mapTypeControl:false,
+        navigationControlOptions:{style:google.maps.NavigationControlStyle.SMALL}
+      }
+      
+      var map = new google.maps.Map(document.getElementById("googleMap"), myOptions);
+      var marker = new google.maps.Marker({
+        position: latlon,
+        map: map,
+        title: "You are here!"
+      });
+    }
+    
+    function showError(error) {
+      switch(error.code) {
+        case error.PERMISSION_DENIED:
+            x.innerHTML = "User denied the request for Geolocation."
+            break;
+        case error.POSITION_UNAVAILABLE:
+            x.innerHTML = "Location information is unavailable."
+            break;
+        case error.TIMEOUT:
+            x.innerHTML = "The request to get user location timed out."
+            break;
+        case error.UNKNOWN_ERROR:
+            x.innerHTML = "An unknown error occurred."
+            break;
+      }
+    }
+</script>
+
+<% end %>

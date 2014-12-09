@@ -35,7 +35,7 @@ function initialize() {
       method: "post",
       data: {address: address}
     }).success(function(data){
-      console.log(data)
+      // console.log(data)
       //If there is not data return from the function;
       if (data.length == 0) {
         return;
