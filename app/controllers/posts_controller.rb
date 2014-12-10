@@ -7,9 +7,7 @@ class PostsController < ApplicationController
     @users = User.all
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @posts.as_json(:include => { :comments => {
-                                                                 :include => { :user => { :only => :name } }
-                                                            } } ) }
+      format.json { render json: @posts}
     end
   end
 
@@ -87,6 +85,7 @@ class PostsController < ApplicationController
 
   def findposts
     @posts = Post.near(params["address"])
+    @users = User.all
     respond_to do |format|
       format.html { redirect_to posts_url }
       format.json { render json: @posts, include: :comments}

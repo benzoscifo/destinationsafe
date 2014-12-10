@@ -38,10 +38,11 @@ function moveToPosition(place, bounds){
   var infouser = 1;
   var comments = '';
   if (place.comments && place.comments.length > 0){
+    debugger;
     $.each(place.comments, function(index, comment){
       comments += '<p>' + comment.body;
       if(comment.user){
-        comments += '<br>'+comment.user.name;
+        comments += '<br>' + comment.user.name;
       }
       comments += '</p>'
         

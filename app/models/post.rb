@@ -8,5 +8,9 @@ class Post < ActiveRecord::Base
   has_many :favorites, as: :favoritable
   belongs_to :User
 
-  
+  def as_json(options=nil)
+    super(:include => { :comments => { :include => { :user => { :only => :name } } } } ) 
+  end
 end
+
+#calling parent json request on comments
