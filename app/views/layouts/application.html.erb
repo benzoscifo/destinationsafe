@@ -33,7 +33,7 @@
           Logged in as
           <b>
             <%= current_user.email %>
-            <%= image_tag(current_user.image) %>
+            <%= image_tag(current_user.image.thumb.url) %>
           </b>
           <%= link_to 'Edit Profile', edit_user_registration_path %>
           \|
