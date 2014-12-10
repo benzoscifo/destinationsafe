@@ -113,7 +113,6 @@ function moveToPosition(place, bounds){
       for (var i = 0; i < markers.length; i++)  {
         var marker = markers[i];
         google.maps.event.addListener(marker, 'click', function () {
-          console.log(this);
            infowindow.setContent(this.infowindow.content);
            infowindow.open(map, this);
         });
