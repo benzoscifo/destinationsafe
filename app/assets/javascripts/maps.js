@@ -39,7 +39,7 @@ function moveToPosition(place, bounds){
   var comments = '';
   if (place.comments && place.comments.length > 0){
     $.each(place.comments, function(index, comment){
-      comments += '<p>' + comment.body + '</p>'; 
+      comments += '<p>' + comment.body + '<br>'+comment.body+'</p>'; 
     });
   }
   if(place.latitude && place.longitude){
