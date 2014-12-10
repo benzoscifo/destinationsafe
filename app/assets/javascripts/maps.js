@@ -34,11 +34,11 @@ var mapProp = {
 function moveToPosition(place, bounds){
   // debugger;
   var infobody = place.body;
+  var infopostuser = place.user.name;
   var infotitle = place.title;
   var infouser = 1;
   var comments = '';
   if (place.comments && place.comments.length > 0){
-    debugger;
     $.each(place.comments, function(index, comment){
       comments += '<p>' + comment.body;
       if(comment.user){
@@ -55,7 +55,7 @@ function moveToPosition(place, bounds){
   }
 
   if(infobody && infotitle){
-    var information = infotitle.concat("<h3>" + infobody + "</h3><h3>Comments</h3>"+ comments + "<a href='/comments/new?post_id=" + place.id + "'>New comment</a>");
+    var information = infotitle.concat("<h3>" + infobody + "</h3><p>"+infopostuser +"</p><h3>Comments</h3>"+ comments + "<a href='/comments/new?post_id=" + place.id + "'>New comment</a>");
 
     var markerInfoWindow = new google.maps.InfoWindow({
       content: information

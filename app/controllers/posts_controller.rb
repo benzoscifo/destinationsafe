@@ -42,7 +42,8 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    @post = Post.new(params[:post])
+    @post = current_user.posts.new(params[:post])
+    binding.pry
 
     respond_to do |format|
       if @post.save
@@ -88,7 +89,7 @@ class PostsController < ApplicationController
     @users = User.all
     respond_to do |format|
       format.html { redirect_to posts_url }
-      format.json { render json: @posts, include: :comments}
+      format.json { render json: @posts, include: :comments }
     end
   end
 end
