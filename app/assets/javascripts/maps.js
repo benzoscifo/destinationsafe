@@ -30,7 +30,7 @@ var mapProp = {
   var searchBox = new google.maps.places.SearchBox(input);
 
   
-
+//adding names to comments
 function moveToPosition(place, bounds){
   // debugger;
   var infobody = place.body;
@@ -39,7 +39,12 @@ function moveToPosition(place, bounds){
   var comments = '';
   if (place.comments && place.comments.length > 0){
     $.each(place.comments, function(index, comment){
-      comments += '<p>' + comment.body + '<br>'+comment.body+'</p>'; 
+      comments += '<p>' + comment.body;
+      if(comment.user){
+        comments += '<br>'+comment.user.name;
+      }
+      comments += '</p>'
+        
     });
   }
   if(place.latitude && place.longitude){

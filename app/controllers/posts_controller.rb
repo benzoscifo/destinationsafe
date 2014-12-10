@@ -7,7 +7,9 @@ class PostsController < ApplicationController
     @users = User.all
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @posts }
+      format.json { render json: @posts.as_json(:include => { :comments => {
+                                                                 :include => { :user => { :only => :name } }
+                                                            } } ) }
     end
   end
 
