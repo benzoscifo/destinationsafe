@@ -1,10 +1,10 @@
 <% if params[:controller] == 'posts' %>
   <div class="jumbotron">
-    <button onclick="getLocation()">My Current Location</button>
+    
     <div id="container"></div>
     <input id="pac-input" class="controls" type="text" placeholder="Search Box">
-    
     <div id="googleMap"></div>
+    <button onclick="getLocation()">My Current Location</button>
   </div>
   <script>
     var x = document.getElementById("container");

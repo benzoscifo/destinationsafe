@@ -6,6 +6,13 @@
   position: relative;
 }
 
+.jumbotron p {
+  font-size: 12px;
+}
+p.info_window_comment {
+  font-size: 12px;
+}
+
 
 
 

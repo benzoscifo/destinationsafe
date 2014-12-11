@@ -40,13 +40,19 @@ function moveToPosition(place, bounds){
   var comments = '';
   if (place.comments && place.comments.length > 0){
     $.each(place.comments, function(index, comment){
-      comments += '<p>' + comment.body;
+      // comments += '<p>' + comment.body;
+      // if(comment.user){
+      //   comments += '<br>' + comment.user.name;
+      // }
+      // comments += '</p>'
+       comments += '<br><p class= info_window_comment>' + comment.body + '</p>';
       if(comment.user){
-        comments += '<br>' + comment.user.name;
+        comments += '<p class= info_window_comment_user>' + comment.user.name + '</p>'; 
       }
-      comments += '</p>'
-        
+      
     });
+
+
   }
   if(place.latitude && place.longitude){
     var markerLocation = new google.maps.LatLng(place.latitude, place.longitude)
@@ -55,7 +61,7 @@ function moveToPosition(place, bounds){
   }
 
   if(infobody && infotitle){
-    var information = infotitle.concat("<h3>" + infobody + "</h3><p>"+infopostuser +"</p><h3>Comments</h3>"+ comments + "<a href='/comments/new?post_id=" + place.id + "'>New comment</a>");
+    var information = "<h3>" + infotitle +"</h3><br><h3>" + infobody + "</h3><p>"+infopostuser +"</p><h3>Comments</h3>"+ comments + "<a href='/comments/new?post_id=" + place.id + "'>New comment</a>";
 
     var markerInfoWindow = new google.maps.InfoWindow({
       content: information
