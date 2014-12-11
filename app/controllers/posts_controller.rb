@@ -42,7 +42,8 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    @post = current_user.posts.new(params[:post])
+    @post = Post.new(params[:post])
+    @post.user_id = current_user.id
     # binding.pry
 
     respond_to do |format|

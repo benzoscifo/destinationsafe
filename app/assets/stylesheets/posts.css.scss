@@ -44,14 +44,20 @@ textarea {
   }
 }
 .message{
-   margin-left: 65px;
+   margin-left: 65px!important;
+   color: red!important;
+   font-size: 35px!important;
  }
 
-.social{
+.social {
   float: left;
 }
-.social{
+.social {
   margin-bottom: 25px;
+}
+.new-post a {
+  color: white!important;
+  font-size: 25px!important;
 }
 
 

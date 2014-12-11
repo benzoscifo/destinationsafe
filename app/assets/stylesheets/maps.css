@@ -6,15 +6,9 @@
   position: relative;
 }
 
-.jumbotron p {
-  font-size: 12px;
+.gm-style-iw h4 {
+  font-size: 12px!important;
+  margin:0!important;
 }
-p.info_window_comment {
-  font-size: 12px;
-}
-
-
-
-
 
 

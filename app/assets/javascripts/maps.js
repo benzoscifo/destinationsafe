@@ -7,12 +7,12 @@ function initialize() {
     content: "holding"
   })
 
-var myCenter=new google.maps.LatLng(51.508742,-0.120850);
+  var myCenter=new google.maps.LatLng(51.508742,-0.120850);
 
-var mapProp = {
-  center: myCenter,
-  zoom:11,
-  mapTypeId: google.maps.MapTypeId.ROADMAP
+  var mapProp = {
+    center: myCenter,
+    zoom:11,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
   };
 
   var markers = [];
@@ -32,9 +32,9 @@ var mapProp = {
   
 //adding names to comments
 function moveToPosition(place, bounds){
-  // debugger;
+  console.log('top of moveToPosition', place, bounds);
   var infobody = place.body;
-  var infopostuser = place.user.name;
+  var infopostuser = place.user ? place.user.name : "No user linked";
   var infotitle = place.title;
   var infouser = 1;
   var comments = '';
@@ -45,7 +45,7 @@ function moveToPosition(place, bounds){
       //   comments += '<br>' + comment.user.name;
       // }
       // comments += '</p>'
-       comments += '<br><p class= info_window_comment>' + comment.body + '</p>';
+       comments += '<p class= info_window_comment>' + comment.body + '</p>';
       if(comment.user){
         comments += '<p class= info_window_comment_user>' + comment.user.name + '</p>'; 
       }
@@ -57,11 +57,12 @@ function moveToPosition(place, bounds){
   if(place.latitude && place.longitude){
     var markerLocation = new google.maps.LatLng(place.latitude, place.longitude)
   }else{
-    var markerLocation = new google.maps.LatLng(place.geometry.location.k, place.geometry.location.B)
+    //Mathilda, I had to change this form location B to location D.....
+    var markerLocation = new google.maps.LatLng(place.geometry.location.k, place.geometry.location.D)
   }
 
   if(infobody && infotitle){
-    var information = "<h3>" + infotitle +"</h3><br><h3>" + infobody + "</h3><p>"+infopostuser +"</p><h3>Comments</h3>"+ comments + "<a href='/comments/new?post_id=" + place.id + "'>New comment</a>";
+    var information = "<h3>" + infotitle +"</h3><br><h5>" + infobody + "</h5><p>"+infopostuser +"</p><h3>Comments</h3>"+ comments + "<a href='/comments/new?post_id=" + place.id + "'>New comment</a>";
 
     var markerInfoWindow = new google.maps.InfoWindow({
       content: information
@@ -77,7 +78,7 @@ function moveToPosition(place, bounds){
 
     markers.push(marker);
   }
-
+  console.log('line 81')
   bounds.extend(markerLocation);
 
   return bounds;
@@ -88,7 +89,7 @@ function moveToPosition(place, bounds){
   google.maps.event.addListener(searchBox, 'places_changed', function() {
     var places = searchBox.getPlaces();
 
-
+    console.log(places);
     var address = places[0].name;
     $.ajax({
       url: "/findposts",
@@ -99,6 +100,7 @@ function moveToPosition(place, bounds){
       var bounds = new google.maps.LatLngBounds();
       // console.log(data)
       //If there is not data return from the server;
+      console.log(data, 'what is the length of the data');
       if (data.length == 0) {
         moveToPosition(places[0], bounds)
 
