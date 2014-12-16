@@ -41,6 +41,7 @@
 <div id="comments">
   <%= render @post.comments %>
 </div> 
+
 <%= form_for Comment.new do |f| %>
   <%= f.hidden_field :post_id, value: @post.id%>
     <p>
