@@ -27,9 +27,9 @@
   <b>Longitude:</b>
   <%= @post.longitude %>
 </p>
-
+<% if !current_user %>
 <h2>Add a comment:</h2>
- 
+ <% end %>
 
 <%= render :partial => @post %>
 
@@ -39,7 +39,7 @@
 
 <h2>Comments</h2>
 <div id="comments">
-  <%= render @post.comments %>
+  
 </div> 
 
 <%= form_for Comment.new do |f| %>

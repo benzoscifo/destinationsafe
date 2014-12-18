@@ -62,7 +62,7 @@ function moveToPosition(place, bounds){
   }
 
   if(infobody && infotitle){
-    var information = "<h3>" + infotitle +"</h3><br><p>" + infobody + "</p><h5>"+infopostuser +"</h5><h3>Comments</h3>"+ comments + "<a href='/comments/new?post_id=" + place.id + "'>New comment</a>";
+    var information = "<h3>" + infotitle +"</h3><br><p>" + infobody + "</p><h5>"+infopostuser +"</h5><h3>Comments</h3>"+ comments + "<a href='/posts/" + place.id + "'>New comment</a>";
 
     var markerInfoWindow = new google.maps.InfoWindow({
       content: information

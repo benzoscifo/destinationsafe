@@ -49,7 +49,7 @@ CommentsAjax.getComments = function(){
     $.each(data, function(index, item){
       var row = $("<tr>"+
         "<td>" + item.user_id +"</td>"+
-        "<td>" + item.title+"</td>"+
+        "<td>" + item.title +"</td>"+
         "<td>" + item.body +"</td>"+
         "<td>" + item.latitude+"</td>"+
         "<td>" + item.latitude+"</td>"+
