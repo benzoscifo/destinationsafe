@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Document</title>
+  <title>DestinationSafe?</title>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBSA52qklrV9HJDgWfxIhh4xsZ9SEql924&sensor=false&libraries=places"></script>
   <meta charset="UTF-8">
   <%= stylesheet_link_tag    "application", :media => "all" %>
@@ -26,7 +26,8 @@
             <span class="icon-bar"></span>
           </button>
           <!-- link destinationsafe to home page -->
-          <a class="navbar-brand" href="/">DestinationSafe</a>
+          <a class="navbar-brand" href="/">Destination</a>
+          <a class="navbar-safe" href="/">Safe?</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
            <ul class='nav navbar-nav'>
@@ -38,11 +39,11 @@
             <%= image_tag(current_user.image.thumb.url) %>
           </b>
           <%= link_to 'Edit Profile', edit_user_registration_path %>
-          \|
+          |
           <%= link_to 'Logout',  destroy_user_session_path, method: :delete %>
         <% else %>
           <%= link_to 'Sign up', new_user_registration_path %>
-          \|
+          |
           <%= link_to 'Login', new_user_session_path %>
         <% end %>
       </div>
@@ -64,7 +65,8 @@
 
       </div>
 
-      <div class="message"><h3>Search your next destination for the most up-to-date local information on safety and security</h3></div>
+      <div class="message"><h3></h3></div>
+      <div class= "new-post"><%= link_to 'New Post', new_post_path, class: "btn btn-danger" %></div>
 
     <!-- Main jumbotron for a primary marketing message or call to action -->
     
@@ -73,14 +75,14 @@
       <!-- Example row of columns -->
       
 
-      <%= render 'partials/jumbotron' %>   
+         
 
       <div>
         <%= yield %>
       </div>
 
-      <hr>
-
+      <%= render 'partials/jumbotron' %>
+      
       <%= render 'partials/carousel' %> 
       <%= render 'partials/footer' %>
     </div>

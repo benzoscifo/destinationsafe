@@ -12,5 +12,17 @@
 }
 
 /*monkeys*/
+.message {
+  color: white;
+  position: relative;
+  left: 60px;
+}
+
+.jumbotron {
+  background-color: black!important;
+}
+
+
+
 
 
