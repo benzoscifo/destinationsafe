@@ -73,11 +73,6 @@ function moveToPosition(place, bounds){
   var comments = '';
   if (place.comments && place.comments.length > 0){
     $.each(place.comments, function(index, comment){
-      // comments += '<p>' + comment.body;
-      // if(comment.user){
-      //   comments += '<br>' + comment.user.name;
-      // }
-      // comments += '</p>'
        comments += '<p class= info_window_comment>' + comment.body + '</p>';
       if(comment.user){
         comments += '<h5 class= info_window_comment_user>' + comment.user.name + '</h5>'; 
@@ -95,7 +90,19 @@ function moveToPosition(place, bounds){
   }
 
   if(infobody && infotitle){
-    var information = "<h3>" + infotitle +"</h3><br><p>" + infobody + "</p><h5>"+infopostuser +"</h5><h3>Comments</h3>"+ comments + "<a href='/posts/" + place.id + "'>New comment</a>";
+    var information = "<h3>" + infotitle +"</h3><br><p>" + infobody + "</p><h5>"+infopostuser +"</h5><h3>Comments</h3>"+ comments +"<div id='comment_box'></div> " + "<form accept-charset='UTF-8' action='/comments.js' class='new_comment' id='new_comment' data-remote='true' method='post'>" + 
+    "<div style='margin:0;padding:0;display:inline'>" + 
+    "<input name='utf8' type='hidden' value='✓'>" + 
+    "<input name='authenticity_token' type='hidden' value='J38zRKZvPQL18K39UtBXoAx0NYIG3kxeNJZNXkUxOjg='>" +
+    "</div>" +
+    "<input id='comment_post_id' name='comment[post_id]' type='hidden' value='" +place.id+"'>" +
+    "<p>" +
+    "<label for='comment_body'>New comment</label><br>" +
+    "<textarea cols='40' id='comment_body' name='comment[body]' rows='20'></textarea>" +
+    "</p>" +
+    "<p><input name='commit' type='submit' value='Add comment'></p>" +
+    "</form>" +
+    "<a href='/posts/" + place.id + "'>Comments page</a>"
 
     var markerInfoWindow = new google.maps.InfoWindow({
       content: information
