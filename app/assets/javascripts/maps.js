@@ -2,6 +2,7 @@
 
 
 
+
 function initialize() {
   var infowindow = new google.maps.InfoWindow({
     content: "holding"
@@ -17,11 +18,14 @@ function initialize() {
 
   var markers = [];
   var map = new google.maps.Map(document.getElementById('googleMap'),mapProp)
-
+ 
+  
+  
 
   var defaultBounds = new google.maps.LatLngBounds(
   new google.maps.LatLng(51.507351, -0.127758),
   new google.maps.LatLng(51.507351, -0.127758));
+
   // map.fitBounds(defaultBounds);
   // Create the search box and link it to the UI element.
   var input = (document.getElementById('pac-input'));
@@ -29,7 +33,7 @@ function initialize() {
 
   var searchBox = new google.maps.places.SearchBox(input);
 
-  
+
 //adding names to comments
 function moveToPosition(place, bounds){
   console.log('top of moveToPosition', place, bounds);
@@ -123,7 +127,7 @@ function moveToPosition(place, bounds){
         var marker = markers[i];
         google.maps.event.addListener(marker, 'click', function () {
            infowindow.setContent(this.infowindow.content);
-           infowindow.open(map, this);
+           infowindow.open(map, marker);
         });
       }
 

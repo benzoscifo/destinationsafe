@@ -1,24 +1,24 @@
 <p id="notice"><%= notice %></p>
 
-<p>
+<!-- <p>
   <b>User:</b>
   <%= @post.user_id %>
-</p>
+</p> -->
 
 <p>
-  <b>Title:</b>
+  <b>Location:</b>
   <%= @post.title %>
 </p>
 
 <p>
-  <b>Body:</b>
+  <b>Content:</b>
   <%= @post.body %>
 </p>
 
 <!-- <h2>Comments</h2>
 <%# render @post.comments %> -->
 
-<p>
+<!-- <p>
   <b>Latitude:</b>
   <%= @post.latitude %>
 </p>
@@ -26,7 +26,7 @@
 <p>
   <b>Longitude:</b>
   <%= @post.longitude %>
-</p>
+</p> -->
 <% if !current_user %>
 <h2>Add a comment:</h2>
  <% end %>

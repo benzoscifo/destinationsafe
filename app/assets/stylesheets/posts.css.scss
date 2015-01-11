@@ -11,6 +11,7 @@
   background: none repeat scroll 0 0 black;
   margin-top: 20px;
   padding: 4%;
+  border-radius: 10px;
   }
 /* Since positioning the image, we need to help out the caption */
 .carousel-caption {
@@ -26,7 +27,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  min-width: 100%;
+  width: 100%;
   height: 300px;
 }
 #myCarousel {
@@ -43,12 +44,13 @@ textarea {
 }
 .navbar-brand{
   color:white!important;
+  font-size: 30px!important;
 }
 .navbar-safe{
   color:red!important;
   position: absolute;
   top: 18px;
-  left: 202px;
+  left: 230px;
   font-size: 20px;
 
 }
@@ -81,7 +83,7 @@ textarea {
   font-size: 25px!important;
   position: absolute;
   top: 60px;
-  left: 900px;
+  left: 1050px;
 }
 
 .gm-style-iw h5 {
@@ -97,5 +99,6 @@ textarea {
 #pac-input {
   width: 200px;
   height: 25px;
-  color: red;
+  color: black;
+  border-color: red;
 }
