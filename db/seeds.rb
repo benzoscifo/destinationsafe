@@ -8,7 +8,7 @@
 
 Post.destroy_all
 
-posts = Post.create( user:Dave Wilkinson, title: 'London', body: 'lovely')
+# posts = Post.create( user_id:'Dave Wilkinson', title: 'London', body: 'lovely')
 p2=Post.create(title:'Bristol', body: 'sunnny')
 p3=Post.create(title: 'Paris', body: 'safe')
 p4=Post.create(title: 'Chelsea', body: 'brewery')

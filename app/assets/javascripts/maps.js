@@ -33,6 +33,35 @@ function initialize() {
 
   var searchBox = new google.maps.places.SearchBox(input);
 
+    var contentString = '<div id="content">'+
+        '<div id="siteNotice">'+
+        '</div>'+
+        '<h1 id="firstHeading" class="firstHeading">DestinationSafe</h1>'+
+        '<div id="bodyContent">'+
+        '<p><b>About:</b></br>  Welcome to DestinationSafe. </br> ' +
+        'Search for places in the searchbar and click on the markers '+
+        'to see how safe your destination is. </br> '+
+        'Leave comments after your visit to tell others how you found it. </br> '+
+        '---------------------------------------------------------------- '+
+        'City: London </br> '+
+        'Crime: Low '+
+        '</p>'+
+        '</div>'+
+        '</div>';
+
+    var infowindow = new google.maps.InfoWindow({
+        content: contentString
+    });
+
+    var marker = new google.maps.Marker({
+        position: myCenter,
+        map: map,
+        title: 'About'
+    });
+    google.maps.event.addListener(marker, 'click', function() {
+      infowindow.open(map,marker);
+    });
+
 
 //adding names to comments
 function moveToPosition(place, bounds){
