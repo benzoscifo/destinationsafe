@@ -202,6 +202,7 @@ DEPENDENCIES
   geocoder
   haml-rails
   jquery-rails
+  json (~> 1.8.1)
   omniauth-facebook
   omniauth-google-oauth2
   omniauth-twitter
