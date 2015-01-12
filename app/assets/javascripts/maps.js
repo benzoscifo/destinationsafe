@@ -41,7 +41,7 @@ function initialize() {
         '<p><b>About:</b> </br> ' +
         'Search cities, towns, suburbs and click on the markers '+
         'to see the most up-to-date information on safety and security. </br> '+
-        '<p><b>Travelled recently?:</b> </br>' +
+        '<p><b>Travelled recently?</b> </br>' +
         'Leave a post or comment to tell others how you found it. </br> '
         '</p>'+
         '</div>'+

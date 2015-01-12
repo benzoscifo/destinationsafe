@@ -87,14 +87,17 @@ textarea {
 }
 
 .gm-style-iw h5 {
-  font-family: 'verdana'
+  font-family: 'verdana';
+  font-size: 25px;
 }
 
 .gm-style-iw p {
   color:red;
+  font-size: 15px;
 }
 .gm-style-iw b {
   color:black;
+  font-size: 15px;
 }
 #comments div {
   border: 2px solid;
@@ -104,4 +107,7 @@ textarea {
   height: 25px;
   color: black;
   border-color: red;
+}
+#firstHeading {
+  font-size: 25px;
 }
